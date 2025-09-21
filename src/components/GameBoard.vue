@@ -25,13 +25,13 @@
         <!-- Image section -->
         <q-card class="image-card" v-animate-css="'fadeIn'">
           <div class="image-container">
-            <q-img
+            <img
               v-if="gameStore.currentImage"
               :src="gameStore.currentImage"
               class="daily-image"
-              spinner-color="primary"
-              loading="lazy"
-              v-animate-css="'zoomIn'"
+              alt="Daily challenge image"
+              @load="imageLoaded = true"
+              @error="imageError = true"
             />
             <LoadingSpinner v-else message="Loading today's image..." />
           </div>
@@ -93,7 +93,7 @@
 
       <!-- Right side - Guesses history -->
       <div class="guess-panel">
-        <q-card v-if="gameStore.guesses.length > 0" class="guesses-card">
+        <q-card class="guesses-card">
           <q-card-section>
             <div class="text-h6 q-mb-md flex items-center">
               <q-icon name="history" class="q-mr-sm" />
@@ -101,6 +101,10 @@
             </div>
             <q-scroll-area style="height: 500px">
               <div class="guesses-list">
+                <div v-if="gameStore.guesses.length === 0" class="no-guesses">
+                  <q-icon name="psychology" size="3rem" color="grey-5" class="q-mb-md" />
+                  <div class="text-body1 text-grey-6">Your guesses will appear here</div>
+                </div>
                 <div
                   v-for="(guess, index) in gameStore.guesses.slice().reverse()"
                   :key="index"
@@ -194,7 +198,7 @@ onMounted(async () => {
 .game-container {
   min-height: 100vh;
   padding: 20px;
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -239,8 +243,8 @@ onMounted(async () => {
 
 .game-content {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 30px;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
   align-items: start;
 }
 
@@ -269,12 +273,16 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
 
 .daily-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
 }
 
 .guess-counter {
@@ -350,20 +358,93 @@ onMounted(async () => {
   align-items: center;
 }
 
+.no-guesses {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
+  .game-container {
+    padding: 16px;
+  }
+  
   .game-content {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
   }
 
   .game-title {
     font-size: 2rem;
   }
+  
+  .game-subtitle {
+    font-size: 1rem;
+  }
 
   .header-content {
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     text-align: center;
+    padding: 16px;
+  }
+  
+  .image-container {
+    height: 250px;
+    padding: 16px;
+  }
+  
+  .input-section {
+    padding: 8px 0;
+  }
+  
+  .guess-input {
+    font-size: 1rem;
+  }
+  
+  .guess-item {
+    padding: 12px;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+  
+  .guess-content {
+    order: 2;
+  }
+  
+  .guess-score {
+    order: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-container {
+    padding: 12px;
+  }
+  
+  .game-title {
+    font-size: 1.5rem;
+  }
+  
+  .header-content {
+    padding: 12px;
+  }
+  
+  .image-container {
+    height: 200px;
+    padding: 12px;
+  }
+  
+  .q-scroll-area {
+    height: 300px !important;
+  }
+  
+  .guess-item {
+    padding: 8px;
   }
 }
 </style>

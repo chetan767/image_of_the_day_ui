@@ -50,6 +50,12 @@ import GameBoard from 'components/GameBoard.vue'
   pointer-events: none;
 }
 
+@media (max-width: 768px) {
+  .page-container::after {
+    animation: none;
+  }
+}
+
 body.body--dark .page-container {
   background: 
     linear-gradient(135deg, #0f0f23 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%),

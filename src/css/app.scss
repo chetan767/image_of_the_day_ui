@@ -46,6 +46,20 @@ body {
   border-color: rgba(255, 255, 255, 0.7);
 }
 
+@media (max-width: 768px) {
+  .q-card:hover {
+    transform: none;
+  }
+  
+  .q-btn:hover {
+    transform: none;
+  }
+  
+  .q-chip:hover {
+    transform: none;
+  }
+}
+
 .q-btn {
   text-transform: none;
   font-weight: 600;
