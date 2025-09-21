@@ -1,20 +1,22 @@
 <template>
   <div class="game-container">
-    <!-- Header with theme toggle -->
+    <!-- Theme toggle at top right -->
+    <q-btn
+      @click="themeStore.toggleTheme()"
+      :icon="themeStore.isDark ? 'light_mode' : 'dark_mode'"
+      round
+      flat
+      size="sm"
+      class="theme-toggle-fixed"
+    />
+
+    <!-- Header -->
     <div class="game-header">
       <div class="header-content">
         <div class="title-section">
           <h1 class="game-title">Daily Image Guesser</h1>
           <p class="game-subtitle">Guess the word from today's image</p>
         </div>
-        <q-btn
-          @click="themeStore.toggleTheme()"
-          :icon="themeStore.isDark ? 'light_mode' : 'dark_mode'"
-          round
-          flat
-          size="lg"
-          class="theme-toggle"
-        />
       </div>
     </div>
 
@@ -196,25 +198,29 @@ onMounted(async () => {
 
 <style scoped>
 .game-container {
-  min-height: 100vh;
+  height: 100vh;
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .game-header {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
+  text-align: center;
+  padding: 10px 0;
 }
 
 .title-section {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .game-title {
@@ -229,16 +235,25 @@ onMounted(async () => {
 
 .game-subtitle {
   font-size: 1.2rem;
-  margin: 8px 0 0 0;
+  margin: 4px 0 0 0;
   opacity: 0.8;
 }
 
-.theme-toggle {
-  transition: all 0.3s ease;
+.theme-toggle-fixed {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.theme-toggle:hover {
-  transform: scale(1.1);
+.theme-toggle-fixed:hover {
+  transform: scale(1.1) rotate(180deg);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 .game-content {
@@ -246,6 +261,8 @@ onMounted(async () => {
   grid-template-columns: 1.5fr 1fr;
   gap: 24px;
   align-items: start;
+  flex: 1;
+  min-height: 0;
 }
 
 .main-panel,
@@ -269,7 +286,7 @@ onMounted(async () => {
 
 .image-container {
   position: relative;
-  height: 400px;
+  height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -326,15 +343,15 @@ onMounted(async () => {
 .guess-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 16px;
-  background: rgba(0, 0, 0, 0.02);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
 .guess-item:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   transform: translateX(5px);
 }
 
@@ -343,108 +360,69 @@ onMounted(async () => {
 }
 
 .guess-word {
-  font-size: 1.1rem;
   font-weight: 600;
+  font-size: 1.1rem;
   margin-bottom: 4px;
 }
 
 .guess-message {
-  font-size: 0.9rem;
   opacity: 0.7;
+  font-size: 0.9rem;
 }
 
 .guess-score {
-  display: flex;
-  align-items: center;
+  margin-left: 16px;
 }
 
 .no-guesses {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
   text-align: center;
+  padding: 40px 20px;
 }
 
+/* Mobile responsive styles */
 @media (max-width: 768px) {
   .game-container {
-    padding: 16px;
+    padding: 10px;
   }
-  
+
+  .game-header {
+    margin-bottom: 10px;
+  }
+
+  .header-content {
+    padding: 5px 0;
+  }
+
+  .game-title {
+    font-size: 1.8rem;
+  }
+
+  .game-subtitle {
+    font-size: 0.9rem;
+    margin: 2px 0 0 0;
+  }
+
   .game-content {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
 
-  .game-title {
-    font-size: 2rem;
-  }
-  
-  .game-subtitle {
-    font-size: 1rem;
-  }
-
-  .header-content {
-    flex-direction: column;
-    gap: 16px;
-    text-align: center;
-    padding: 16px;
-  }
-  
   .image-container {
-    height: 250px;
-    padding: 16px;
+    height: 40vh;
+    padding: 10px;
   }
-  
+
+  .theme-toggle-fixed {
+    top: 10px;
+    right: 10px;
+  }
+
   .input-section {
-    padding: 8px 0;
+    padding: 5px 0;
   }
-  
-  .guess-input {
-    font-size: 1rem;
-  }
-  
-  .guess-item {
-    padding: 12px;
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-  }
-  
-  .guess-content {
-    order: 2;
-  }
-  
-  .guess-score {
-    order: 1;
-  }
-}
 
-@media (max-width: 480px) {
-  .game-container {
-    padding: 12px;
-  }
-  
-  .game-title {
-    font-size: 1.5rem;
-  }
-  
-  .header-content {
-    padding: 12px;
-  }
-  
-  .image-container {
-    height: 200px;
-    padding: 12px;
-  }
-  
-  .q-scroll-area {
-    height: 300px !important;
-  }
-  
-  .guess-item {
-    padding: 8px;
+  .guess-counter {
+    margin-bottom: 8px;
   }
 }
 </style>
