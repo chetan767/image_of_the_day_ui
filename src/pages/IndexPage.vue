@@ -12,10 +12,10 @@ import GameBoard from 'components/GameBoard.vue'
 .page-container {
   min-height: 100vh;
   background: 
-    linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%),
-    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+    linear-gradient(135deg, #f8fafc 0%, #e2e8f0 30%, #cbd5e1 100%),
+    radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
   position: relative;
   overflow: hidden;
 }

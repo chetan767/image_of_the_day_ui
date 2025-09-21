@@ -102,7 +102,7 @@
             <q-scroll-area style="height: 500px">
               <div class="guesses-list">
                 <div
-                  v-for="(guess, index) in gameStore.guesses"
+                  v-for="(guess, index) in gameStore.guesses.slice().reverse()"
                   :key="index"
                   class="guess-item"
                   v-animate-css="'slideInUp'"

@@ -39,7 +39,7 @@ export const useGameStore = defineStore('game', {
       try {
         this.loading = true
         const response = await api.post('/status', {
-          body: { user_id: this.userId },
+          user_id: this.userId,
         })
         this.todayCompleted = response.data.has_guessed_correctly
         this.currentImage = response.data.image_url
