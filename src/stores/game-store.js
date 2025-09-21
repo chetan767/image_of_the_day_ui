@@ -7,7 +7,7 @@ export const useGameStore = defineStore('game', {
     sessionId: null,
     currentImage: null,
     guesses: [],
-    maxGuesses: 10,
+    maxGuesses: 5,
     gameCompleted: false,
     todayCompleted: false,
     loading: false,
