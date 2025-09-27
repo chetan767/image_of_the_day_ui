@@ -83,14 +83,28 @@
         </q-card>
 
         <!-- Completion message -->
-        <q-card v-if="gameStore.todayCompleted" class="completion-card" v-animate-css="'bounceIn'">
-          <q-card-section class="text-center">
-            <q-icon name="celebration" size="4rem" color="positive" class="q-mb-md" />
-            <div class="text-h5 text-weight-bold q-mb-sm">Congratulations!</div>
-            <div class="text-body1 opacity-70">You've completed today's challenge</div>
-            <div class="text-body2 opacity-60 q-mt-sm">Come back tomorrow for a new image</div>
-          </q-card-section>
-        </q-card>
+        <div v-if="gameStore.todayCompleted" v-animate-css="'bounceIn'">
+          <!-- Correct Guess Message -->
+          <q-card v-if="gameStore.hasGuessedCorrectly" class="completion-card bg-positive">
+            <q-card-section class="text-center">
+              <q-icon name="celebration" size="4rem" color="white" class="q-mb-md" />
+              <div class="text-h5 text-weight-bold q-mb-sm">Congratulations!</div>
+              <div class="text-body1" style="opacity: 0.8">You've guessed correctly!</div>
+              <div class="text-body2" style="opacity: 0.7">Come back tomorrow for a new image.</div>
+            </q-card-section>
+          </q-card>
+          <!-- Out of Guesses Message -->
+          <q-card v-else class="completion-card bg-negative">
+            <q-card-section class="text-center">
+              <q-icon name="sentiment_dissatisfied" size="4rem" color="white" class="q-mb-md" />
+              <div class="text-h5 text-weight-bold q-mb-sm">Out of Guesses!</div>
+              <div class="text-body1" style="opacity: 0.8">
+                You've used all your attempts for today.
+              </div>
+              <div class="text-body2" style="opacity: 0.7">Come back tomorrow for a new image.</div>
+            </q-card-section>
+          </q-card>
+        </div>
       </div>
 
       <!-- Right side - Guesses history -->
@@ -324,7 +338,7 @@ onMounted(async () => {
 }
 
 .completion-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
   color: white;
 }
 

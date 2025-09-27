@@ -10,6 +10,7 @@ export const useGameStore = defineStore('game', {
     maxGuesses: 5,
     gameCompleted: false,
     todayCompleted: false,
+    hasGuessedCorrectly: false,
     loading: false,
     error: null,
   }),
@@ -41,10 +42,25 @@ export const useGameStore = defineStore('game', {
         const response = await api.post('/status', {
           user_id: this.userId,
         })
-        this.todayCompleted = response.data.has_guessed_correctly
+        this.todayCompleted = response.data.has_guessed_correctly || response.data.out_of_guesses
+        this.hasGuessedCorrectly = response.data.has_guessed_correctly
         this.currentImage = response.data.image_url
         if (response.data.guesses) {
           this.guesses = response.data.guesses
+        } else if (response.data.previous_guesses) {
+          this.guesses = response.data.previous_guesses.map((g) => ({
+            word: g.user_word,
+            score: g.score,
+            message: g.message,
+            timestamp: new Date(g.timestamp),
+          }))
+        } else if (response.data.guess_count) {
+          // If only guess_count is provided, fill with placeholders
+          this.guesses = Array(response.data.guess_count).fill({
+            word: '?',
+            score: 0,
+            message: 'Previous guess',
+          })
         }
       } catch (error) {
         this.error = 'Failed to check game status'
@@ -74,8 +90,13 @@ export const useGameStore = defineStore('game', {
 
         this.guesses.push(guessResult)
 
-        if (response.data.correct || this.guesses.length >= this.maxGuesses) {
+        if (
+          response.data.guessed ||
+          this.guesses.length >= this.maxGuesses ||
+          response.data.out_of_guesses
+        ) {
           this.gameCompleted = true
+          this.hasGuessedCorrectly = response.data.guessed
           this.todayCompleted = true
         }
 
@@ -92,6 +113,7 @@ export const useGameStore = defineStore('game', {
     resetGame() {
       this.guesses = []
       this.gameCompleted = false
+      this.hasGuessedCorrectly = false
       this.error = null
       this.sessionId = this.generateSessionId()
     },
