@@ -214,17 +214,18 @@ onMounted(async () => {
 .game-container {
   min-height: 100vh;
   padding: 20px;
+  padding-top: 10px;
   max-width: 1000px;
   margin: 0 auto;
 }
 
 .game-header {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .header-content {
   text-align: center;
-  padding: 10px 0;
+  padding: 0 0 10px 0;
 }
 
 .title-section {
@@ -234,6 +235,7 @@ onMounted(async () => {
 }
 
 .game-title {
+  line-height: normal;
   font-size: 3rem;
   font-weight: 700;
   margin: 0;
@@ -295,7 +297,7 @@ onMounted(async () => {
 
 .image-container {
   position: relative;
-  height: 500px;
+  height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
