@@ -48,7 +48,7 @@
                   :color="gameStore.remainingGuesses <= 3 ? 'negative' : 'primary'"
                   text-color="white"
                   icon="psychology"
-                  size="lg"
+                  size="md"
                 >
                   {{ gameStore.remainingGuesses }} guesses left
                 </q-chip>
@@ -61,7 +61,7 @@
                   :disable="!gameStore.canGuess || gameStore.loading"
                   @keyup.enter="submitGuess"
                   class="guess-input"
-                  size="lg"
+                  size="sm"
                 >
                   <template v-slot:prepend>
                     <q-icon name="search" />
@@ -71,6 +71,7 @@
                       round
                       color="primary"
                       icon="send"
+                      size="sm"
                       @click="submitGuess"
                       :disable="!currentGuess.trim() || !gameStore.canGuess || gameStore.loading"
                       :loading="gameStore.loading"
@@ -115,12 +116,12 @@
               <q-icon name="history" class="q-mr-sm" />
               Your Guesses
             </div>
-            <q-scroll-area style="height: calc(100% - 54px)" class="quesses-scroll-area">
+            <div v-if="gameStore.guesses.length === 0" class="no-guesses">
+              <q-icon name="psychology" size="3rem" color="grey-5" class="q-mb-md" />
+              <div class="text-body1 text-grey-6">Your guesses will appear here</div>
+            </div>
+            <q-scroll-area class="quesses-scroll-area" v-else>
               <div class="guesses-list">
-                <div v-if="gameStore.guesses.length === 0" class="no-guesses">
-                  <q-icon name="psychology" size="3rem" color="grey-5" class="q-mb-md" />
-                  <div class="text-body1 text-grey-6">Your guesses will appear here</div>
-                </div>
                 <div
                   v-for="(guess, index) in gameStore.guesses.slice().reverse()"
                   :key="index"
@@ -391,7 +392,7 @@ onMounted(async () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px;
+  padding: 20px 20px;
   text-align: center;
 }
 
@@ -406,7 +407,7 @@ onMounted(async () => {
   }
 
   .game-content {
-    grid-template-rows: 55% 40%;
+    grid-template-rows: 60% 30%;
     grid-template-columns: 1fr;
     gap: 10px;
     height: calc(100vh - 100px);
@@ -431,7 +432,7 @@ onMounted(async () => {
 
   .image-container {
     height: 100%;
-    padding: 16px;
+    padding: 2px;
   }
 
   .input-section {
@@ -444,17 +445,17 @@ onMounted(async () => {
 
   .guess-item {
     padding: 8px;
-    flex-direction: column;
+    flex-direction: row;
     gap: 8px;
-    text-align: center;
-  }
-
-  .guess-content {
-    order: 2;
+    align-items: center;
   }
 
   .guess-score {
-    order: 1;
+    flex-shrink: 0;
+  }
+
+  .guess-score .q-circular-progress {
+    margin: 0 !important;
   }
 
   .main-panel {
