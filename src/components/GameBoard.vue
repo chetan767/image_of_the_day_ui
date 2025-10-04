@@ -109,13 +109,13 @@
 
       <!-- Right side - Guesses history -->
       <div class="guess-panel">
-        <q-card class="guesses-card">
-          <q-card-section>
+        <q-card class="guesses-card full-height">
+          <q-card-section class="full-height">
             <div class="text-h6 q-mb-md flex items-center">
               <q-icon name="history" class="q-mr-sm" />
               Your Guesses
             </div>
-            <q-scroll-area style="height: 500px">
+            <q-scroll-area style="height: calc(100% - 54px)" class="quesses-scroll-area">
               <div class="guesses-list">
                 <div v-if="gameStore.guesses.length === 0" class="no-guesses">
                   <q-icon name="psychology" size="3rem" color="grey-5" class="q-mb-md" />
@@ -275,6 +275,7 @@ onMounted(async () => {
 
 .main-panel,
 .guess-panel {
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -392,6 +393,10 @@ onMounted(async () => {
   text-align: center;
 }
 
+.quesses-scroll-area {
+  height: calc(100% - 54px) !important;
+}
+
 @media (max-width: 768px) {
   .game-container {
     padding: 16px;
@@ -445,6 +450,10 @@ onMounted(async () => {
 
   .guess-score {
     order: 1;
+  }
+
+  .quesses-scroll-area {
+    height: 500px !important;
   }
 }
 
