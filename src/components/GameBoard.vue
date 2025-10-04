@@ -402,11 +402,14 @@ onMounted(async () => {
 @media (max-width: 768px) {
   .game-container {
     padding: 16px;
+    padding-top: 10px;
   }
 
   .game-content {
+    grid-template-rows: 55% 40%;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 10px;
+    height: calc(100vh - 100px);
   }
 
   .game-title {
@@ -427,12 +430,12 @@ onMounted(async () => {
   }
 
   .image-container {
-    height: 350px;
+    height: 100%;
     padding: 16px;
   }
 
   .input-section {
-    padding: 8px 0;
+    padding: 0px 0;
   }
 
   .guess-input {
@@ -440,7 +443,7 @@ onMounted(async () => {
   }
 
   .guess-item {
-    padding: 12px;
+    padding: 8px;
     flex-direction: column;
     gap: 8px;
     text-align: center;
@@ -454,12 +457,20 @@ onMounted(async () => {
     order: 1;
   }
 
-  .quesses-scroll-area {
-    height: 500px !important;
+  .main-panel {
+    gap: 10px;
+  }
+
+  .image-card {
+    height: 60% !important;
+  }
+
+  .input-card {
+    height: 40% !important;
   }
 }
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .game-container {
     padding: 12px;
   }
@@ -489,5 +500,5 @@ onMounted(async () => {
   .guess-item {
     padding: 8px;
   }
-}
+} */
 </style>
