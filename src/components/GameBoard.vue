@@ -11,10 +11,10 @@
     />
 
     <!-- Header -->
-    <div class="game-header">
+    <div class="game-header q-mb-md">
       <div class="header-content">
         <div class="title-section">
-          <h1 class="game-title">Daily Image Guesser</h1>
+          <div class="game-title">Snaple</div>
           <p class="game-subtitle">Guess the word from today's image</p>
         </div>
       </div>
@@ -57,11 +57,12 @@
                 <q-input
                   v-model="currentGuess"
                   label="What do you see in the image?"
-                  outlined
                   :disable="!gameStore.canGuess || gameStore.loading"
                   @keyup.enter="submitGuess"
                   class="guess-input"
                   size="sm"
+                  rounded
+                  outlined
                 >
                   <template v-slot:prepend>
                     <q-icon name="search" />
@@ -237,7 +238,7 @@ onMounted(async () => {
 
 .game-title {
   line-height: normal;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
   margin: 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

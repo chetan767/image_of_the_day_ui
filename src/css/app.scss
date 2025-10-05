@@ -6,23 +6,27 @@
   --success: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
   --warning: linear-gradient(135deg, #f59e0b 0%, #eab308 100%);
   --danger: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
-  
+
   --glass-light: rgba(255, 255, 255, 0.8);
   --glass-dark: rgba(0, 0, 0, 0.25);
   --blur: blur(20px);
-  
+
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
   --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.2);
-  
+
   --border-radius: 24px;
   --border-radius-sm: 16px;
   --border-radius-lg: 32px;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-weight: 400;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -50,11 +54,11 @@ body {
   .q-card:hover {
     transform: none;
   }
-  
+
   .q-btn:hover {
     transform: none;
   }
-  
+
   .q-chip:hover {
     transform: none;
   }
@@ -83,28 +87,6 @@ body {
   transform: translateY(0) scale(0.98);
 }
 
-.q-input {
-  .q-field__control {
-    background: var(--glass-light);
-    backdrop-filter: var(--blur);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--border-radius);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: var(--shadow-sm);
-  }
-  
-  &:hover .q-field__control {
-    border-color: rgba(102, 126, 234, 0.4);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
-  }
-  
-  &.q-field--focused .q-field__control {
-    border-color: #667eea;
-    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1), var(--shadow-lg);
-  }
-}
-
 .q-chip {
   font-weight: 600;
   letter-spacing: 0.025em;
@@ -129,26 +111,26 @@ body.body--dark {
     background: var(--glass-dark);
     border-color: rgba(255, 255, 255, 0.1);
   }
-  
+
   .q-card:hover {
     background: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.2);
   }
-  
+
   .q-input .q-field__control {
     background: var(--glass-dark);
     border-color: rgba(255, 255, 255, 0.1);
   }
-  
+
   .q-input:hover .q-field__control {
     border-color: rgba(102, 126, 234, 0.5);
   }
-  
+
   .guess-item {
     background: rgba(255, 255, 255, 0.08) !important;
     border-color: rgba(255, 255, 255, 0.1) !important;
   }
-  
+
   .guess-item:hover {
     background: rgba(255, 255, 255, 0.15) !important;
     border-color: rgba(102, 126, 234, 0.3) !important;
@@ -196,7 +178,8 @@ body.body--dark {
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -238,7 +221,8 @@ body.body--dark {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
